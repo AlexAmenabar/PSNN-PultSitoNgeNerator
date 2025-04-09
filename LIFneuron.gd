@@ -15,6 +15,9 @@ var synapse_node # node with synapses
 var input_synapse_neurons = [] # list of input neuron identifiers
 var output_synapse_neurons = [] # list of output neuron identifiers
 
+var input_synapse_nodes = []
+var output_synapse_nodes = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	v = 0
@@ -65,18 +68,6 @@ func load_values():
 	is_output = int(get_node("Is out/TextEdit").text)
 	#n_input_synap = int(get_node("Input Synpases/TextEdit").text)
 	#n_output_synap = int(get_node("Output Synpases/TextEdit").text)
-	
-
-	'''if n_input_synap > 0:
-		var synapse = get_node("SynapseExample")
-		synapse.visible=true
-		set_slot_enabled_left(synapse.get_index()-1, true)#i + 9, true)
-
-		
-	if n_output_synap > 0:	
-		var synapse = get_node("SynapseExample")
-		synapse.visible=true
-		set_slot_enabled_right(synapse.get_index()-1, true)#i + 9, true)'''
 
 
 func _on_colapse_pressed():
@@ -109,3 +100,9 @@ func _on_show_pressed():
 	
 	get_node("Show").visible = false
 	get_node("Colapse").visible = true
+
+func add_input_synapse(synapse):
+	input_synapse_nodes.append(synapse)
+
+func add_output_synapse(synapse):
+	output_synapse_nodes.append(synapse)

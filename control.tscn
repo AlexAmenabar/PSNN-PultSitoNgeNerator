@@ -400,6 +400,31 @@ offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -29.0
+offset_right = 217.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 19
+
+[node name="FileNameText" type="TextEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "FileName"
+
+[node name="FileNameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Confirm"
+
 [connection signal="connection_request" from="GraphEdit" to="." method="_on_graph_edit_connection_request"]
 [connection signal="gui_input" from="GraphEdit" to="." method="_on_graph_edit_gui_input"]
 [connection signal="node_selected" from="GraphEdit" to="." method="_on_graph_edit_node_selected"]
@@ -409,3 +434,4 @@ offset_bottom = 40.0
 [connection signal="pressed" from="GraphEdit/VBoxContainer/PropagateButton" to="." method="_on_propagate_button_pressed"]
 [connection signal="pressed" from="BaseNeuron/Show" to="BaseNeuron" method="_on_show_pressed"]
 [connection signal="pressed" from="BaseNeuron/Colapse" to="BaseNeuron" method="_on_colapse_pressed"]
+[connection signal="pressed" from="VBoxContainer/FileNameButton" to="." method="_on_file_name_button_pressed"]

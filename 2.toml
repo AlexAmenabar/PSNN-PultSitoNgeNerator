@@ -1,0 +1,25 @@
+z[general]
+	neurons = 2
+	input_neurons = 0
+	output_neurons = 0
+	synapsis = 1
+	input_synapsis = 0
+	output_synapsis = 0
+
+[neurons]
+	behaviour = 1
+	behaviour_list = [1, 1]
+	v_thres = 150
+	v_thres_list = [150, 150]
+	t_refract = 2
+	t_refract_list = [2, 2]
+	input_synapsis = [0, 1]
+	output_synapsis = [1, 0]
+
+[synapsis]
+	latency = 1
+	latency_list = [1]
+	weights = [0]
+	training_zones = 0
+	training_zones_list = [0]
+	connections = [[0], [1, 1, 1], [0]]

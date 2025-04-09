@@ -24,6 +24,8 @@ var n_synapses = 0
 var n_input_synapses = 0
 var n_output_synapses = 0
 
+var file_name_node
+var toml_text
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,6 +37,8 @@ func _ready():
 	# Initialize lists of neurons and synapses
 	neurons = []
 	synapses = []
+	
+	file_name_node = get_node("VBoxContainer")
 
 
 # This function is executed when an input event is detected
@@ -58,19 +62,74 @@ func _on_graph_edit_gui_input(event):
 			
 			neurons.append(node_instance) # add neuron to neurons list
 
-# Executed when Update button is pressed, it updates values of neurons and synapses
-func _on_refresh_button_pressed():
+func update_network():
 	print("Updating network data...")
 	
 	# Update neuron values
 	for neuron in neurons:
+		var temp_n_input_synap = neuron.is_input
+		var temp_n_output_synap = neuron.is_output
+		
 		neuron.load_values() # load values on text fields into neurons
-	
+		
+		# if input or / and output synapses have been added, create them
+		if neuron.is_input > temp_n_input_synap:
+			for i in range(temp_n_input_synap, neuron.is_input):
+				# Get position in the middle of those neuron to locate the synapse
+				var synapse_position = neuron.position_offset - Vector2(10, 0)
+				
+				# Duplicate synapse node to locate in the screen
+				var synapse = synapse_example.duplicate()
+				synapse.name = "synapse" + str(n_synapses) # change synapse name
+				synapse.title = synapse.name # change graph node title
+				get_node("GraphEdit").add_child(synapse) # add synapse to graphEdit
+				
+				# change synapse position
+				synapse.position = synapse_position
+				synapse.position_offset = synapse_position
+
+				# add synapse to synapse list
+				synapses.append(synapse)
+				n_synapses += 1
+				n_input_synapses+=1
+				
+				synapse.is_input = 1
+				
+				# append synapse to neuron input synapse list
+				neuron.input_synapse_nodes.append(synapse)
+
+		if neuron.is_output > temp_n_output_synap:
+			for i in range(temp_n_output_synap, neuron.is_output):
+				# Get position in the middle of those neuron to locate the synapse
+				var synapse_position = neuron.position_offset + Vector2(10, 0)
+				
+				# Duplicate synapse node to locate in the screen
+				var synapse = synapse_example.duplicate()
+				synapse.name = "synapse" + str(n_synapses) # change synapse name
+				synapse.title = synapse.name # change graph node title
+				get_node("GraphEdit").add_child(synapse) # add synapse to graphEdit
+				
+				# change synapse position
+				synapse.position = synapse_position
+				synapse.position_offset = synapse_position
+
+				# add synapse to synapse list
+				synapses.append(synapse)
+				n_synapses += 1
+				n_output_synapses+=1
+				
+				synapse.is_output = 1
+				neuron.output_synapse_nodes.append(synapse)
+		
 	# Update synapse values
 	for synapse in synapses:
 		synapse.load_values() # load values on text fields into synapses
 	print("Data updated!")
 
+# Executed when Update button is pressed, it updates values of neurons and synapses
+func _on_refresh_button_pressed():
+	update_network()
+	
 # TODO: change only selected node 
 func _on_update_selection_button_pressed():
 	pass
@@ -136,6 +195,10 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 
 	# add synapse to synapse list
 	synapses.append(synapse)
+	
+	# add synapse to neurons
+	from_neuron.output_synapse_nodes.append(synapse)
+	to_neuron.input_synapse_nodes.append(synapse)
 
 # Change selected node: event
 func _on_graph_edit_node_selected(node):
@@ -145,7 +208,10 @@ func _on_graph_edit_node_selected(node):
 func _on_export_button_pressed():	
 	print("Exporting network...")
 	
-	var toml_text := ""
+	# update network first
+	update_network()
+	
+	toml_text = ""
 	
 	# Start with general section of TOML file
 	toml_text += "[general]\n"
@@ -160,9 +226,9 @@ func _on_export_button_pressed():
 	toml_text += "	output_neurons = " + str(n_output_neurons) + "\n" 
 	
 	# same for synapses (THIS MUST BE CHANGE IN THE FUTURE AS IT USES NEURONS INFORMATION AND IS NOT CORRECT)
-	toml_text += "	synapsis = " + str(len(synapses) + n_input_neurons + n_output_neurons) + "\n" 
-	toml_text += "	input_synapsis = " + str(n_input_neurons) + "\n" # this must be changed in the future, no n_neurons
-	toml_text += "	output_synapsis = " + str(n_output_neurons) + "\n\n" # this must be changed in the future
+	toml_text += "	synapsis = " + str(len(synapses)) + "\n" 
+	toml_text += "	input_synapsis = " + str(n_input_neurons) + "\n" 
+	toml_text += "	output_synapsis = " + str(n_output_neurons) + "\n\n"
 
 	# Neurons section
 	toml_text += "[neurons]\n"
@@ -224,18 +290,18 @@ func _on_export_button_pressed():
 	var input_synapses_per_neuron = []
 	var output_synapses_per_neuron = []
 	for neuron in neurons:
-		n_input_synapses = len(neuron.input_synapse_neurons)
-		n_output_synapses = len(neuron.output_synapse_neurons)
+		var neuron_input_synapses = len(neuron.input_synapse_neurons)
+		var neuron_output_synapses = len(neuron.output_synapse_neurons)
 		
 		# Yo las sinapsis de entrada y de salida las cuento
 		if neuron.is_input == 1:
-			n_input_synapses += 1 # CHANGE IN THE FUTURE
+			neuron_input_synapses += 1 # CHANGE IN THE FUTURE
 		
 		if neuron.is_output == 1:
-			n_output_synapses += 1
+			neuron_output_synapses += 1
 			
-		input_synapses_per_neuron.append(n_input_synapses)#neuron.n_input_synap)
-		output_synapses_per_neuron.append(n_output_synapses)#neuron.n_output_synap)
+		input_synapses_per_neuron.append(neuron_input_synapses)#neuron.n_input_synap)
+		output_synapses_per_neuron.append(neuron_output_synapses)#neuron.n_output_synap)
 
 	# Write information into file
 	toml_text += "	input_synapsis = " + str(input_synapses_per_neuron) + "\n"
@@ -255,6 +321,39 @@ func _on_export_button_pressed():
 	var all_equals_latency = 1
 	var all_equals_tz = 1
 	
+	# synapses in neuron order: first input neurons, them middle, finally only output
+	for neuron in neurons: # process input neuron synapses
+		# first input synapses
+		if neuron.is_input == 1:
+			for synap in neuron.input_synapse_nodes:
+				if synap.is_input == 1:
+					latency_list.append(synap.delay)
+					weight_list.append(synap.weight)
+					training_zone_list.append(synap.learning_rule)
+	
+	# add neurons output synapses
+	for neuron in neurons:
+		# first neuron output synapses but not network output synapses
+		for synap in neuron.output_synapse_nodes:
+			latency_list.append(synap.delay)
+			weight_list.append(synap.weight)
+			training_zone_list.append(synap.learning_rule)
+	
+	# first input neurons, then neuron that are not output, and finally output neurons
+	'''for synapse in synapses:
+		if synapse.is_input:
+			latency_list.append(synapse.delay)
+			weight_list.append(synapse.weight)
+			training_zone_list.append(synapse.learning_rule)
+			
+			for lat in latency_list:
+				if lat != synapse.delay:
+					all_equals_latency = 0
+			
+			for lr in training_zone_list:
+				if lr != synapse.learning_rule:
+					all_equals_tz = 0
+	
 	for synapse in synapses:
 		latency_list.append(synapse.delay)
 		weight_list.append(synapse.weight)
@@ -267,7 +366,7 @@ func _on_export_button_pressed():
 		for lr in training_zone_list:
 			if lr != synapse.learning_rule:
 				all_equals_tz = 0
-
+'''
 	latency = latency_list[0]
 	if all_equals_latency == 0:
 		latency = -1
@@ -329,15 +428,21 @@ func _on_export_button_pressed():
 			count_neurons += 1
 		
 		# If there is at least one neuron, add to the list
-		if count_neurons > 0:
-			layer_connections[0] = count_neurons
-			connections.append(layer_connections.duplicate())
+		layer_connections[0] = count_neurons
+		connections.append(layer_connections.duplicate())
 	
 	# Add list of connections to TOML file
 	toml_text += "	connections = " + str(connections) + "\n"
 
-	var file := FileAccess.open("res://datos.toml", FileAccess.WRITE)
+	file_name_node.visible=true
+
+func _on_file_name_button_pressed():
+	file_name_node.visible = false
+	var file_name = get_node("VBoxContainer/FileNameText").text
+	
+	var file := FileAccess.open("res://" + file_name + ".toml", FileAccess.WRITE)
 	file.store_string(toml_text)
 	file.close()
 	
 	print("Network correctly exported!")
+	
