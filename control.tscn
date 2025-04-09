@@ -1,0 +1,411 @@
+[gd_scene load_steps=4 format=3 uid="uid://e16ldjdg61ng"]
+
+[ext_resource type="Script" path="res://CreadorSNN.gd" id="1_1cu86"]
+[ext_resource type="Script" path="res://LIFneuron.gd" id="2_61281"]
+[ext_resource type="Script" path="res://synapse.gd" id="3_b1det"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1cu86")
+
+[node name="GraphEdit" type="GraphEdit" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GraphEdit"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="UpdateAllButton" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Update all network"
+
+[node name="ExportButton" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Export network to TOML"
+
+[node name="UpdateSelectionButton" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Update selection"
+
+[node name="PropagateButton" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Propagate data "
+
+[node name="BaseNeuron" type="GraphNode" parent="."]
+layout_mode = 0
+offset_left = -398.0
+offset_top = 176.0
+offset_right = -177.0
+offset_bottom = 513.0
+mouse_filter = 1
+title = "LIF neuron"
+resizable = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = true
+slot/1/left_type = 0
+slot/1/left_color = Color(0.447059, 0.372549, 0.0627451, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = true
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color(1, 1, 1, 1)
+slot/4/left_icon = null
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color(1, 1, 1, 1)
+slot/4/right_icon = null
+slot/4/draw_stylebox = true
+slot/5/left_enabled = false
+slot/5/left_type = 0
+slot/5/left_color = Color(1, 1, 1, 1)
+slot/5/left_icon = null
+slot/5/right_enabled = false
+slot/5/right_type = 0
+slot/5/right_color = Color(1, 1, 1, 1)
+slot/5/right_icon = null
+slot/5/draw_stylebox = true
+slot/6/left_enabled = false
+slot/6/left_type = 0
+slot/6/left_color = Color(1, 1, 1, 1)
+slot/6/left_icon = null
+slot/6/right_enabled = false
+slot/6/right_type = 0
+slot/6/right_color = Color(1, 1, 1, 1)
+slot/6/right_icon = null
+slot/6/draw_stylebox = true
+slot/7/left_enabled = false
+slot/7/left_type = 0
+slot/7/left_color = Color(1, 1, 1, 1)
+slot/7/left_icon = null
+slot/7/right_enabled = false
+slot/7/right_type = 0
+slot/7/right_color = Color(1, 1, 1, 1)
+slot/7/right_icon = null
+slot/7/draw_stylebox = true
+slot/8/left_enabled = false
+slot/8/left_type = 0
+slot/8/left_color = Color(1, 1, 1, 1)
+slot/8/left_icon = null
+slot/8/right_enabled = false
+slot/8/right_type = 0
+slot/8/right_color = Color(1, 1, 1, 1)
+slot/8/right_icon = null
+slot/8/draw_stylebox = true
+slot/9/left_enabled = false
+slot/9/left_type = 0
+slot/9/left_color = Color(1, 1, 1, 1)
+slot/9/left_icon = null
+slot/9/right_enabled = false
+slot/9/right_type = 0
+slot/9/right_color = Color(1, 1, 1, 1)
+slot/9/right_icon = null
+slot/9/draw_stylebox = true
+slot/10/left_enabled = false
+slot/10/left_type = 0
+slot/10/left_color = Color(1, 1, 1, 1)
+slot/10/left_icon = null
+slot/10/right_enabled = false
+slot/10/right_type = 0
+slot/10/right_color = Color(1, 1, 1, 1)
+slot/10/right_icon = null
+slot/10/draw_stylebox = true
+slot/11/left_enabled = false
+slot/11/left_type = 0
+slot/11/left_color = Color(1, 1, 1, 1)
+slot/11/left_icon = null
+slot/11/right_enabled = false
+slot/11/right_type = 0
+slot/11/right_color = Color(1, 1, 1, 1)
+slot/11/right_icon = null
+slot/11/draw_stylebox = true
+script = ExtResource("2_61281")
+
+[node name="Show" type="Button" parent="BaseNeuron"]
+visible = false
+layout_mode = 2
+text = "Show"
+
+[node name="Colapse" type="Button" parent="BaseNeuron"]
+layout_mode = 2
+text = "Colapse"
+
+[node name="Synapses" type="HBoxContainer" parent="BaseNeuron"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/Synapses"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Synapses"
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/Synapses"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="TextEdit2" type="TextEdit" parent="BaseNeuron/Synapses"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="TextEdit3" type="TextEdit" parent="BaseNeuron/Synapses"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="V" type="HBoxContainer" parent="BaseNeuron"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/V"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "V"
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/V"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Threshold" type="HBoxContainer" parent="BaseNeuron"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/Threshold"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Threshold"
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/Threshold"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "150"
+
+[node name="R" type="HBoxContainer" parent="BaseNeuron"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/R"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "R"
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/R"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
+[node name="Refractary time" type="HBoxContainer" parent="BaseNeuron"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/Refractary time"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Refract. t"
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/Refractary time"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2"
+
+[node name="Behaviour" type="HBoxContainer" parent="BaseNeuron"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/Behaviour"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Behaviour"
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/Behaviour"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+
+[node name="Is in" type="HBoxContainer" parent="BaseNeuron"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/Is in"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Is input."
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/Is in"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Is out" type="HBoxContainer" parent="BaseNeuron"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/Is out"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Is output."
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/Is out"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Input Synpases" type="HBoxContainer" parent="BaseNeuron"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/Input Synpases"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Input synap."
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/Input Synpases"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Output Synpases" type="HBoxContainer" parent="BaseNeuron"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/Output Synpases"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Out synap."
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/Output Synpases"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="SynapseExample" type="GraphNode" parent="."]
+layout_mode = 0
+offset_left = -324.0
+offset_top = -96.0
+offset_right = -132.0
+offset_bottom = 44.0
+title = "Synapse"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("3_b1det")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SynapseExample"]
+layout_mode = 2
+
+[node name="W" type="HBoxContainer" parent="SynapseExample/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="SynapseExample/VBoxContainer/W"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "W"
+
+[node name="TextEdit" type="TextEdit" parent="SynapseExample/VBoxContainer/W"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Delay" type="HBoxContainer" parent="SynapseExample/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="SynapseExample/VBoxContainer/Delay"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Delay"
+
+[node name="TextEdit" type="TextEdit" parent="SynapseExample/VBoxContainer/Delay"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+
+[node name="Learning Rule" type="HBoxContainer" parent="SynapseExample/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="SynapseExample/VBoxContainer/Learning Rule"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "L. Rule"
+
+[node name="TextEdit" type="TextEdit" parent="SynapseExample/VBoxContainer/Learning Rule"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Synapses" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="connection_request" from="GraphEdit" to="." method="_on_graph_edit_connection_request"]
+[connection signal="gui_input" from="GraphEdit" to="." method="_on_graph_edit_gui_input"]
+[connection signal="node_selected" from="GraphEdit" to="." method="_on_graph_edit_node_selected"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/UpdateAllButton" to="." method="_on_refresh_button_pressed"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/ExportButton" to="." method="_on_export_button_pressed"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/UpdateSelectionButton" to="." method="_on_update_selection_button_pressed"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/PropagateButton" to="." method="_on_propagate_button_pressed"]
+[connection signal="pressed" from="BaseNeuron/Show" to="BaseNeuron" method="_on_show_pressed"]
+[connection signal="pressed" from="BaseNeuron/Colapse" to="BaseNeuron" method="_on_colapse_pressed"]
