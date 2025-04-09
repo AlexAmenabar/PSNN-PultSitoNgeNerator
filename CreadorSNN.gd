@@ -162,7 +162,7 @@ func _on_export_button_pressed():
 	# same for synapses (THIS MUST BE CHANGE IN THE FUTURE AS IT USES NEURONS INFORMATION AND IS NOT CORRECT)
 	toml_text += "	synapsis = " + str(len(synapses) + n_input_neurons + n_output_neurons) + "\n" 
 	toml_text += "	input_synapsis = " + str(n_input_neurons) + "\n" # this must be changed in the future, no n_neurons
-	toml_text += "	output_sinapsis = " + str(n_output_neurons) + "\n\n" # this must be changed in the future
+	toml_text += "	output_synapsis = " + str(n_output_neurons) + "\n\n" # this must be changed in the future
 
 	# Neurons section
 	toml_text += "[neurons]\n"
