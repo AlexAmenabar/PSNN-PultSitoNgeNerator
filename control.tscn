@@ -40,12 +40,37 @@ layout_mode = 2
 text = "Export network to TOML"
 
 [node name="UpdateSelectionButton" type="Button" parent="GraphEdit/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Update selection"
 
 [node name="PropagateButton" type="Button" parent="GraphEdit/VBoxContainer"]
 layout_mode = 2
 text = "Propagate data "
+
+[node name="Hide all" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Hide all neurons and synapses"
+
+[node name="Show All" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Show all neurons and synapses"
+
+[node name="Hide neurons" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Hide all neurons"
+
+[node name="Show neurons" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Show all neurons"
+
+[node name="Hide synapses" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Hide all synapses"
+
+[node name="Show synapses" type="Button" parent="GraphEdit/VBoxContainer"]
+layout_mode = 2
+text = "Show all neurons"
 
 [node name="BaseNeuron" type="GraphNode" parent="."]
 layout_mode = 0
@@ -432,6 +457,12 @@ text = "Confirm"
 [connection signal="pressed" from="GraphEdit/VBoxContainer/ExportButton" to="." method="_on_export_button_pressed"]
 [connection signal="pressed" from="GraphEdit/VBoxContainer/UpdateSelectionButton" to="." method="_on_update_selection_button_pressed"]
 [connection signal="pressed" from="GraphEdit/VBoxContainer/PropagateButton" to="." method="_on_propagate_button_pressed"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/Hide all" to="." method="_on_hide_all_pressed"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/Show All" to="." method="_on_show_all_pressed"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/Hide neurons" to="." method="_on_hide_neurons_pressed"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/Show neurons" to="." method="_on_show_neurons_pressed"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/Hide synapses" to="." method="_on_hide_synapses_pressed"]
+[connection signal="pressed" from="GraphEdit/VBoxContainer/Show synapses" to="." method="_on_show_synapses_pressed"]
 [connection signal="pressed" from="BaseNeuron/Show" to="BaseNeuron" method="_on_show_pressed"]
 [connection signal="pressed" from="BaseNeuron/Colapse" to="BaseNeuron" method="_on_colapse_pressed"]
 [connection signal="pressed" from="VBoxContainer/FileNameButton" to="." method="_on_file_name_button_pressed"]

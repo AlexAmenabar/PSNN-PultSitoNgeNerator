@@ -35,3 +35,9 @@ func load_values():
 	weight = float(get_node("VBoxContainer/W/TextEdit").text)
 	delay = int(get_node("VBoxContainer/Delay/TextEdit").text)
 	learning_rule = int(get_node("VBoxContainer/Learning Rule/TextEdit").text)
+
+func show_synapse():
+	get_node(".").visible=true
+	
+func hide_synapse():
+	get_node(".").visible=false

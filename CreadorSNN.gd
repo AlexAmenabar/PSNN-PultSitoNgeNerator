@@ -138,7 +138,7 @@ func _on_update_selection_button_pressed():
 # Propagate values of selected neuron or synapse to the rest of neurons or synapses
 func _on_propagate_button_pressed():
 	# If there is no neuron or synapse selected finish
-	if selected_node == null or selected_node == "Nil":
+	if selected_node == null:
 		return 0
 	
 	# Update values of selected neuron or synapse
@@ -446,3 +446,38 @@ func _on_file_name_button_pressed():
 	
 	print("Network correctly exported!")
 	
+	
+func _on_hide_all_pressed():
+	for neuron in neurons:
+		neuron.hide_neuron()
+		
+	for synapse in synapses:
+		synapse.hide_synapse()
+
+
+func _on_show_all_pressed():
+	for neuron in neurons:
+		neuron.show_neuron()
+		
+	for synapse in synapses:
+		synapse.show_synapse()
+
+
+func _on_hide_neurons_pressed():
+	for neuron in neurons:
+		neuron.hide_neuron()
+
+
+func _on_show_neurons_pressed():
+	for neuron in neurons:
+		neuron.show_neuron()
+
+
+func _on_hide_synapses_pressed():
+	for synapse in synapses:
+		synapse.hide_synapse()
+
+
+func _on_show_synapses_pressed():
+	for synapse in synapses:
+		synapse.show_synapse()

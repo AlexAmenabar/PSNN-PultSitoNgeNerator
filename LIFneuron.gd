@@ -69,8 +69,7 @@ func load_values():
 	#n_input_synap = int(get_node("Input Synpases/TextEdit").text)
 	#n_output_synap = int(get_node("Output Synpases/TextEdit").text)
 
-
-func _on_colapse_pressed():
+func hide_neuron():
 	get_node("V").visible = false
 	get_node("Threshold").visible = false
 	get_node("R").visible = false
@@ -85,9 +84,7 @@ func _on_colapse_pressed():
 	get_node("Colapse").visible = false
 	size = Vector2(size.x, 1)
 
-
-
-func _on_show_pressed():
+func show_neuron():
 	get_node("V").visible = true
 	get_node("Threshold").visible = true
 	get_node("R").visible = true
@@ -101,6 +98,15 @@ func _on_show_pressed():
 	get_node("Show").visible = false
 	get_node("Colapse").visible = true
 
+
+
+func _on_colapse_pressed():
+	hide_neuron()
+
+
+func _on_show_pressed():
+	show_neuron()
+	
 func add_input_synapse(synapse):
 	input_synapse_nodes.append(synapse)
 
