@@ -244,12 +244,22 @@ func _on_export_button_pressed():
 	var refractary_time
 	var refract_list = []
 	var all_equals_refract = 1
+
+	var res
+	var res_list = []
+	var all_equals_r = 1
+	
+	var v_rest
+	var v_rest_list = []
+	var all_equals_v_rest = 1
 	
 	# load lists of neurons variables and if all are equals story only one number, else all the list
 	for neuron in neurons:
 		behaviour_list.append(neuron.behaviour)
 		thres_list.append(neuron.v_thres)
 		refract_list.append(neuron.refract_t)
+		res_list.append(neuron.R)
+		v_rest_list.append(neuron.v_rest)
 		
 		for behav in behaviour_list:
 			if behav != neuron.behaviour:
@@ -262,6 +272,14 @@ func _on_export_button_pressed():
 		for refract in refract_list:
 			if refract != neuron.refract_t:
 				all_equals_refract = 0
+		
+		for r in res_list:
+			if r != neuron.R:
+				all_equals_r = 0
+		
+		for rest in v_rest_list:
+			if rest != neuron.v_rest:
+				all_equals_v_rest = 0
 			
 	behaviour = behaviour_list[0]
 	if all_equals_behaviour == 0:
@@ -276,15 +294,30 @@ func _on_export_button_pressed():
 	if all_equals_refract == 0:
 		refractary_time = -1
 	
+	res = res_list[0]
+	if all_equals_r == 0:
+		res = -1
+
+	v_rest = v_rest_list[0]
+	if all_equals_v_rest == 0:
+		v_rest = -1
+
+
 	# write information into TOML file
 	toml_text += "	behaviour = " + str(behaviour) + "\n"
 	toml_text += "	behaviour_list = " + str(behaviour_list) + "\n"
 	
 	toml_text += "	v_thres = " + str(threshold) + "\n"
 	toml_text += "	v_thres_list = " + str(thres_list) + "\n"
+
+	toml_text += "	v_thres = " + str(threshold) + "\n"
+	toml_text += "	v_thres_list = " + str(thres_list) + "\n"
 	
-	toml_text += "	t_refract = " + str(refractary_time) + "\n"
-	toml_text += "	t_refract_list = " + str(refract_list) + "\n"
+	toml_text += "	v_rest = " + str(v_rest) + "\n"
+	toml_text += "	v_rest_list = " + str(v_rest_list) + "\n"
+	
+	toml_text += "	r = " + str(res) + "\n"
+	toml_text += "	r_list = " + str(res_list) + "\n"
 	
 	# count input and output synapses per each neuron
 	var input_synapses_per_neuron = []

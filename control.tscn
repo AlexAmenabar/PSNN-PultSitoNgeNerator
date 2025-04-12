@@ -189,6 +189,15 @@ slot/11/right_type = 0
 slot/11/right_color = Color(1, 1, 1, 1)
 slot/11/right_icon = null
 slot/11/draw_stylebox = true
+slot/12/left_enabled = false
+slot/12/left_type = 0
+slot/12/left_color = Color(1, 1, 1, 1)
+slot/12/left_icon = null
+slot/12/right_enabled = false
+slot/12/right_type = 0
+slot/12/right_color = Color(1, 1, 1, 1)
+slot/12/right_icon = null
+slot/12/draw_stylebox = true
 script = ExtResource("2_61281")
 
 [node name="Show" type="Button" parent="BaseNeuron"]
@@ -296,6 +305,20 @@ text = "Behaviour"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1"
+
+[node name="V rest" type="HBoxContainer" parent="BaseNeuron"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BaseNeuron/V rest"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "V rest"
+
+[node name="TextEdit" type="TextEdit" parent="BaseNeuron/V rest"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
 
 [node name="Is in" type="HBoxContainer" parent="BaseNeuron"]
 layout_mode = 2

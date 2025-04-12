@@ -3,6 +3,7 @@ extends GraphNode
 # LIF neuron parameters
 var v # membrane potential
 var v_thres # threshold
+var v_rest # resting membrane potential
 var R # neuron resistance
 var refract_t # refractary period
 var behaviour # neuron behaviour, excitatory or inhibitory
@@ -22,6 +23,7 @@ var output_synapse_nodes = []
 func _ready():
 	v = 0
 	v_thres = 150
+	v_rest = 0
 	R = 10
 	refract_t = 2
 	behaviour = 1 # excitatory
@@ -34,9 +36,10 @@ func _ready():
 	
 	print_values()
 
-func update_values(p_v, p_vt, p_R, p_reftact, p_behaviour, p_is_in, p_is_out):
+func update_values(p_v, p_vt, p_v_rest, p_R, p_reftact, p_behaviour, p_is_in, p_is_out):
 	v = p_v
 	v_thres = p_vt
+	v_rest = p_v_rest
 	R = p_R
 	refract_t = p_reftact
 	behaviour = p_behaviour
@@ -50,6 +53,7 @@ func update_values(p_v, p_vt, p_R, p_reftact, p_behaviour, p_is_in, p_is_out):
 func print_values():
 	get_node("V/TextEdit").text = str(v)
 	get_node("Threshold/TextEdit").text = str(v_thres)
+	get_node("V rest/TextEdit").text = str(v_rest)
 	get_node("R/TextEdit").text = str(R)
 	get_node("Refractary time/TextEdit").text = str(refract_t)
 	get_node("Behaviour/TextEdit").text = str(behaviour)
@@ -59,8 +63,9 @@ func print_values():
 	#get_node("Output Synpases/TextEdit").text = str(n_output_synap)
 	
 func load_values():
-	v = int(get_node("V/TextEdit").text)
-	v_thres = int(get_node("Threshold/TextEdit").text)
+	v = float(get_node("V/TextEdit").text)
+	v_thres = float(get_node("Threshold/TextEdit").text)
+	v_rest = float(get_node("V rest/TextEdit").text)
 	R = int(get_node("R/TextEdit").text)
 	refract_t = int(get_node("Refractary time/TextEdit").text)
 	behaviour = int(get_node("Behaviour/TextEdit").text)
@@ -72,6 +77,7 @@ func load_values():
 func hide_neuron():
 	get_node("V").visible = false
 	get_node("Threshold").visible = false
+	get_node("V rest").visible = false
 	get_node("R").visible = false
 	get_node("Refractary time").visible = false
 	get_node("Behaviour").visible = false
@@ -87,6 +93,7 @@ func hide_neuron():
 func show_neuron():
 	get_node("V").visible = true
 	get_node("Threshold").visible = true
+	get_node("V rest").visible = true
 	get_node("R").visible = true
 	get_node("Refractary time").visible = true
 	get_node("Behaviour").visible = true
