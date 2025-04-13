@@ -305,19 +305,19 @@ func _on_export_button_pressed():
 
 	# write information into TOML file
 	toml_text += "	behaviour = " + str(behaviour) + "\n"
-	toml_text += "	behaviour_list = [" + str(behaviour_list) + "]\n"
+	toml_text += "	behaviour_list = " + str(behaviour_list) + "\n"
 	
 	toml_text += "	v_thres = " + str(threshold) + "\n"
-	toml_text += "	v_thres_list = [" + str(thres_list) + "]\n"
+	toml_text += "	v_thres_list = " + str(thres_list) + "\n"
 	
 	toml_text += "	v_rest = " + str(v_rest) + "\n"
-	toml_text += "	v_rest_list = [" + str(v_rest_list) + "]\n"
+	toml_text += "	v_rest_list = " + str(v_rest_list) + "\n"
 	
 	toml_text += "	r = " + str(res) + "\n"
-	toml_text += "	r_list = [" + str(res_list) + "]\n"
+	toml_text += "	r_list = " + str(res_list) + "\n"
 	
 	toml_text += "	t_refract = " + str(refractary_time) + "\n"
-	toml_text += "	t_refract_list = [" + str(refract_list) + "]\n"
+	toml_text += "	t_refract_list = " + str(refract_list) + "\n"
 	
 	# count input and output synapses per each neuron
 	var input_synapses_per_neuron = []
